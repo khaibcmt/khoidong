@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
+  <title>VietStudio AI Director 4K</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <span class="logo">🎬</span>
+      <div>
+        <h1>VietStudio AI Director 4K</h1>
+        <p>Hệ thống Đạo diễn AI tự động dựng video bài giảng giáo dục</p>
+      </div>
+    </div>
+    <button id="btnResetAll" class="btn btn-rose">🔄 Tạo Mới Video</button>
+  </header>
+
+  <main class="main-layout">
+    <!-- CỘT ĐIỀU KHIỂN -->
+    <section class="panel control-panel">
+      <!-- Cấu hình API Keys xoay vòng -->
+      <div class="field-group">
+        <label for="apiKeys">🔑 Gemini API Keys (Mỗi dòng 1 key để tự xoay vòng chống cạn token):</label>
+        <textarea id="apiKeys" rows="2" placeholder="AIzaSyA...&#10;AIzaSyB..."></textarea>
+        <span id="keyCountLabel" class="hint-text">Số key sẵn sàng: 0</span>
+      </div>
+
+      <!-- CHẾ ĐỘ ĐẠO DIỄN TỰ ĐỘNG -->
+      <div class="director-box">
+        <h3>🚀 Đạo Diễn Tự Động (1-Chạm)</h3>
+        <div class="field-group">
+          <label for="topicInput">Tên bài học / Chủ đề:</label>
+          <input type="text" id="topicInput" placeholder="Ví dụ: Bài 9: Nuôi thủy sản thâm canh & tuần hoàn RAS">
+        </div>
+        <div class="grid-2">
+          <div class="field-group">
+            <label for="subjectSelect">Môn học:</label>
+            <select id="subjectSelect">
+              <option value="Công nghệ Nông nghiệp / Thủy sản" selected>Công nghệ Nông nghiệp</option>
+              <option value="Sinh học">Sinh học</option>
+              <option value="Vật lý">Vật lý</option>
+              <option value="Hóa học">Hóa học</option>
+              <option value="Khoa học tự nhiên">Khoa học tự nhiên</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="durationSelect">Thời lượng:</label>
+            <select id="durationSelect">
+              <option value="1">1 Phút (~3 cảnh)</option>
+              <option value="2">2 Phút (~5 cảnh)</option>
+              <option value="3" selected>3 Phút (~7-8 cảnh)</option>
+            </select>
+          </div>
+        </div>
+        <button id="btnAutoGenerate" class="btn btn-amber">⚡ TỰ ĐỘNG BIÊN SOẠN & DỰNG VIDEO</button>
+      </div>
+
+      <!-- DÁN KỊCH BẢN TÙY CHỌN -->
+      <div class="field-group" style="margin-top: 6px;">
+        <label for="customScript">Hoặc Dán Kịch Bản Thủ Công (Để trống nếu dùng Đạo diễn AI):</label>
+        <textarea id="customScript" rows="3" placeholder="Nhập kịch bản phân cảnh nếu đã có sẵn..."></textarea>
+      </div>
+
+      <div class="action-grid">
+        <button id="btnPlay" class="btn btn-emerald" disabled>▶️ Phát Video & Giọng Đọc</button>
+        <button id="btnExport" class="btn btn-cyan" disabled>🎬 Xuất Video (.webm)</button>
+      </div>
+
+      <div class="scene-container">
+        <h4>Danh Sách Phân Cảnh (<span id="sceneNum">0</span>)</h4>
+        <div id="scenesList" class="scenes-list">
+          <p class="empty-state">Chưa có phân cảnh nào. Vui lòng nhập tên bài hoặc dán kịch bản để bắt đầu.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MÀN HÌNH RENDER CANVAS -->
+    <section class="panel preview-panel">
+      <div class="canvas-box">
+        <canvas id="videoCanvas" width="1280" height="720"></canvas>
+      </div>
+      <div class="timeline-bar">
+        <span id="statusLabel">Trạng thái: Sẵn sàng</span>
+        <span id="timeLabel">00:00 / 00:00</span>
+      </div>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
